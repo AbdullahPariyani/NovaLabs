@@ -1,6 +1,6 @@
 const Seller = require('../../Database/Schema/seller');
 const SlotBooking = require('../../Database/Schema/slotBooking');
-const { DefaultSlots } = require('../../configs/constants');
+const { DefaultSlots } = require('../../Configs/constants');
 
 class SellerModel {
     async Add(seller) {

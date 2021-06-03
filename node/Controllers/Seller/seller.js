@@ -1,5 +1,5 @@
 const sellerModel = new (require('../../Models/seller/seller'))();
-const { STATUS_CODES } = require('../../configs/constants');
+const { STATUS_CODES } = require('../../Configs/constants');
 
 class sellerController {
 

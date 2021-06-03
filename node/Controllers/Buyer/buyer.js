@@ -1,5 +1,5 @@
 const buyerModel = new (require('../../Models/buyer/buyer'))();
-const { STATUS_CODES } = require('../../configs/constants');
+const { STATUS_CODES } = require('../../Configs/constants');
 
 class buyerController {
 

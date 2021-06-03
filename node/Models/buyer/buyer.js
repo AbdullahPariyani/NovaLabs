@@ -1,7 +1,7 @@
 const Seller = require('../../Database/Schema/seller');
 const Buyer = require('../../Database/Schema/buyer');
 const SlotBooking = require('../../Database/Schema/slotBooking');
-const { DefaultSlots } = require('../../configs/constants');
+const { DefaultSlots } = require('../../Configs/constants');
 
 class BuyerModel {
 

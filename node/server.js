@@ -12,11 +12,11 @@ const port = process.env.PORT || 8000
 const app = express();
 
 // ---------------------------    SERVER CONFIGS ----------------------------------
-require('./configs/globals'); // GLOBAL SETTINGS FILES
+require('./Configs/globals'); // GLOBAL SETTINGS FILES
 
 const server = (SHOULD_RUN_ON_HTTP == 'true') ? http.createServer(app) : http.createServer(options, app);
 
-const connectDB = require('./configs/connection');
+const connectDB = require('./Configs/connection');
 connectDB();
 
 // ------------------------      GLOBAL MIDDLEWARES -------------------------
@@ -27,7 +27,7 @@ app.use(cors()) // ALLOWED ALL CROSS ORIGIN REQUESTS
 
 // ------------------------    RESPONSE HANDLER    -------------------
 app.use((req, res, next) => {
-    const ResponseHandler = require('./configs/responseHandler')
+    const ResponseHandler = require('./Configs/responseHandler')
     res.handler = new ResponseHandler(req, res);
     next()
 });
