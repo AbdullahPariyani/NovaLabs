@@ -20,6 +20,9 @@ router.route('/book-appointment')
     .post(sellerController.BookAppointment);
 
 router.route('/get-all-appointment')
-    .post(sellerController.AllAppointment);
+    .get(sellerController.AllAppointment);
+
+router.route('/accept-reject-appointment')
+    .post(sellerController.AcceptRejectAppointment);
 
 module.exports = router

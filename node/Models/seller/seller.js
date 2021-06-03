@@ -43,13 +43,13 @@ class SellerModel {
             return { count: bookingList.length, message: "Already Booked" }
 
         const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true });
-        bookingList.isBookedForRequest = true
+        bookingList.isBookedForRequest = true;
 
         return { count: (bookingList.length), rows: bookingList };
     }
 
     async AllAppointment(body) {
-        let bookingList = await SlotBooking.find({ isBookedForRequest: true });
+        let bookingList = await SlotBooking.find({ isBookedForRequest: true, isTimeSlotBooked: false });
 
         let tempBuyerDetails, newArray = JSON.parse(JSON.stringify(bookingList));
         for (let i = 0; i < newArray.length; i++) {
@@ -61,6 +61,27 @@ class SellerModel {
         }
 
         return { count: (bookingList.length), rows: newArray };
+    }
+
+    async AcceptRejectAppointment(body) {
+        const { _id, accepted } = body;
+        let slotBookItem = await SlotBooking.find({ _id });
+
+        if (!slotBookItem || slotBookItem.length === 0)
+            return { count: slotBookItem.length, message: "Sorry... No such slot found" };
+        else if (slotBookItem[0].isTimeSlotBooked)
+            return { count: slotBookItem.length, message: "Already Booked" }
+        else if (!slotBookItem[0].isBookedForRequest)
+            return { count: slotBookItem.length, message: "Please create slot book request first" }
+
+        let updateValue = { isTimeSlotBooked: true };
+        if (!accepted) {
+            updateValue = { isTimeSlotBooked: true, isBookedForRequest: false }
+        }
+        const updatedRecord = await SlotBooking.updateOne({ _id }, updateValue);
+        const responseMsg = accepted ? 'Accepted' : 'Rejected'
+
+        return { count: (slotBookItem.length), message: `${responseMsg} Successfully` };
     }
 
     async slotBook(id) {
