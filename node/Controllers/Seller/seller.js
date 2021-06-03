@@ -40,15 +40,6 @@ class sellerController {
         }
     }
 
-    async BookAppointment(request, response) {
-        try {
-            let result = await sellerModel.BookAppointment(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     async AllAppointment(request, response) {
         try {
             let result = await sellerModel.AllAppointment(request.body);

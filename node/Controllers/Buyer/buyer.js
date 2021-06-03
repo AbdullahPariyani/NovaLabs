@@ -22,15 +22,6 @@ class buyerController {
         }
     }
 
-    async ListWithSlot(request, response) {
-        try {
-            let result = await buyerModel.ListWithSlot();
-            response.handler.success(result, 'STATUS.SUCCESS')
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     async Search(request, response) {
         try {
             let result = await buyerModel.Search(request.body);

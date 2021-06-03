@@ -16,17 +16,6 @@ class BuyerModel {
         return { count: (buyerList.length), rows: buyerList };
     }
 
-    async ListWithSlot() {
-        let sellerList = await Seller.find();
-        let slotBookingList = await SlotBooking.find();
-
-        let sellerWithSlots = [];
-        sellerList.forEach(async (seller, i) => {
-            sellerWithSlots.push({ 'seller': seller, 'slots': slotBookingList.filter(slot => slot.sellerId == seller._id) });
-        });
-        return sellerWithSlots;
-    }
-
     async Search(body) {
         const { _id } = body;
         let sellerList = await Buyer.find({ _id });

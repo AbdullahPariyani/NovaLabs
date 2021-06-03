@@ -16,9 +16,6 @@ router.route('/search')
 router.route('/list-seller-with-slot')
     .get(sellerController.ListWithSlot);
 
-router.route('/book-appointment')
-    .post(sellerController.BookAppointment);
-
 router.route('/get-all-appointment')
     .get(sellerController.AllAppointment);
 

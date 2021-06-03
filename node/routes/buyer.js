@@ -16,9 +16,6 @@ router.route('/search')
 router.route('/search-by-email')
     .post(buyerController.SearchByEmail);
 
-router.route('/list-seller-with-slot')
-    .get(buyerController.ListWithSlot);
-
 router.route('/book-appointment')
     .post(buyerController.BookAppointment);
 

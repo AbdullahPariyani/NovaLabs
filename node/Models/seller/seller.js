@@ -33,21 +33,6 @@ class SellerModel {
         return { count: (sellerList.length), rows: sellerList };
     }
 
-    async BookAppointment(body) {
-        const { _id, sellerId, timeSlotID } = body;
-        let bookingList = await SlotBooking.find({ _id, sellerId, timeSlotID });
-
-        if (bookingList.length === 0)
-            return { count: bookingList.length, message: "Sorry... No such slot found" };
-        else if (bookingList.isTimeSlotBooked)
-            return { count: bookingList.length, message: "Already Booked" }
-
-        const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true });
-        bookingList.isBookedForRequest = true;
-
-        return { count: (bookingList.length), rows: bookingList };
-    }
-
     async AllAppointment(body) {
         let bookingList = await SlotBooking.find({ isBookedForRequest: true, isTimeSlotBooked: false });
 
