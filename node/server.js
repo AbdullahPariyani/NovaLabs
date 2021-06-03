@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 // --------------------------    ROUTES    ------------------
-const appRoutes = require('./routes')
+const appRoutes = require('./Routes')
 appRoutes(app);
 
 // --------------------------    GLOBAL ERROR HANDLER    ------------------
