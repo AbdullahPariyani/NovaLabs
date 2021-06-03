@@ -19,4 +19,7 @@ router.route('/list-seller-with-slot')
 router.route('/book-appointment')
     .post(sellerController.BookAppointment);
 
+router.route('/get-all-appointment')
+    .post(sellerController.AllAppointment);
+
 module.exports = router

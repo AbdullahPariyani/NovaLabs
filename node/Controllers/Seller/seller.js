@@ -48,6 +48,15 @@ class sellerController {
             console.log(error);
         }
     }
+
+    async AllAppointment(request, response) {
+        try {
+            let result = await sellerModel.AllAppointment(request.body);
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = sellerController;

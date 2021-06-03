@@ -22,4 +22,7 @@ router.route('/list-seller-with-slot')
 router.route('/book-appointment')
     .post(buyerController.BookAppointment);
 
+router.route('/accpeted-booking')
+    .post(buyerController.AccpetedBooking);
+
 module.exports = router

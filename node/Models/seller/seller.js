@@ -1,4 +1,5 @@
 const Seller = require('../../Database/Schema/seller');
+const Buyer = require('../../Database/Schema/buyer');
 const SlotBooking = require('../../Database/Schema/slotBooking');
 const { DefaultSlots } = require('../../Configs/constants');
 
@@ -47,6 +48,21 @@ class SellerModel {
         return { count: (bookingList.length), rows: bookingList };
     }
 
+    async AllAppointment(body) {
+        let bookingList = await SlotBooking.find({ isBookedForRequest: true });
+
+        let tempBuyerDetails, newArray = JSON.parse(JSON.stringify(bookingList));
+        for (let i = 0; i < newArray.length; i++) {
+            tempBuyerDetails = await Buyer.find({ _id: newArray[i].buyerId });
+            newArray[i].firstName = tempBuyerDetails[0].firstName;
+            newArray[i].lastName = tempBuyerDetails[0].lastName;
+            newArray[i].email = tempBuyerDetails[0].email;
+            delete newArray[i].__v;
+        }
+
+        return { count: (bookingList.length), rows: newArray };
+    }
+
     async slotBook(id) {
         Object.values(DefaultSlots.slotValue).forEach(async (slot, i) => {
             let slotModel = new SlotBooking({
@@ -54,7 +70,8 @@ class SellerModel {
                 timeSlotValue: slot,
                 timeSlotID: DefaultSlots.slotId[i],
                 isTimeSlotBooked: false,
-                isBookedForRequest: false
+                isBookedForRequest: false,
+                buyerId: ''
             });
             await slotModel.save();
         });

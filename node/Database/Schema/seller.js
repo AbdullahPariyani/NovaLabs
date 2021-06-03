@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const buyer = new mongoose.Schema({
+const seller = new mongoose.Schema({
     firstName: {
         type: String
     },
@@ -15,4 +15,4 @@ const buyer = new mongoose.Schema({
     }
 });
 
-module.exports = Buyer = mongoose.model('buyer', buyer);
+module.exports = Seller = mongoose.model('seller', seller);

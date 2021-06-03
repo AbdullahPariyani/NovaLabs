@@ -13,7 +13,7 @@ class BuyerModel {
 
     async List() {
         let buyerList = await Buyer.find();
-        return { count: (sellerList.length), rows: buyerList };
+        return { count: (buyerList.length), rows: buyerList };
     }
 
     async ListWithSlot() {
@@ -29,17 +29,17 @@ class BuyerModel {
 
     async Search(body) {
         const { _id } = body;
-        let sellerList = await Seller.find({ _id });
+        let sellerList = await Buyer.find({ _id });
         return { count: (sellerList.length), rows: sellerList };
     }
 
     async SearchByEmail(body) {
-        let sellerList = await Seller.find(body);
+        let sellerList = await Buyer.find(body);
         return { count: (sellerList.length), rows: sellerList };
     }
 
     async BookAppointment(body) {
-        const { _id, sellerId, timeSlotID } = body;
+        const { _id, sellerId, timeSlotID, buyerId } = body;
         let bookingList = await SlotBooking.find({ _id, sellerId, timeSlotID });
 
         if (bookingList.length === 0)
@@ -47,10 +47,17 @@ class BuyerModel {
         else if (bookingList.isTimeSlotBooked)
             return { count: bookingList.length, message: "Already Booked" }
 
-        const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true });
+        const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true, buyerId: buyerId });
         bookingList.isBookedForRequest = true
 
-        return { count: (bookingList.length), rows: bookingList };
+        return { count: (bookingList.length), message: "Your appointment has been booked successfully" };
+    }
+
+    async AccpetedBooking(body) {
+        const { _id, sellerId, timeSlotID, buyerId } = body;
+        let bookingList = await SlotBooking.find({ _id, sellerId, timeSlotID });
+
+        const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true, buyerId: buyerId });
     }
 
 }

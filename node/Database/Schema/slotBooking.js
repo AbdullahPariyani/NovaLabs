@@ -15,6 +15,9 @@ const slotBooking = new mongoose.Schema({
     },
     isBookedForRequest: {
         type: Boolean
+    },
+    buyerId: {
+        type: String
     }
 });
 

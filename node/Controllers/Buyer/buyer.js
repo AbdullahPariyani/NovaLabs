@@ -66,6 +66,15 @@ class buyerController {
             console.log(error);
         }
     }
+
+    async AccpetedBooking(request, response) {
+        try {
+            let result = await buyerModel.AccpetedBooking(request.body);
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = buyerController;
