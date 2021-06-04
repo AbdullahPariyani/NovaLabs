@@ -29,7 +29,11 @@ class SellerModel {
 
     async searchSellerDetails(body) {
         const sellerList = await this.ListWithSlot();
-        let sellerBookingList = sellerList.filter(row => row.seller._id == "60b9fe9525a0ea367cfc886f")[0].slots;
+        let sellerBookingList = sellerList.filter(row => row.seller._id == body.sellerId)[0]?.slots;
+
+        if (!sellerBookingList) {
+            return false;
+        }
 
         sellerBookingList = JSON.parse(JSON.stringify(sellerBookingList));
 
@@ -39,7 +43,7 @@ class SellerModel {
             sellerBookingList[i].buyerDetails = [];
             if (buyerId != "") {
                 const buyerDetails = await Buyer.find({ _id: buyerId });
-                sellerBookingList[i].buyerDetails = JSON.parse(JSON.stringify(buyerDetails));
+                sellerBookingList[i].buyerDetails = JSON.parse(JSON.stringify(buyerDetails[0]));
             }
         }
 

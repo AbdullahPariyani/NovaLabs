@@ -6,7 +6,11 @@ class sellerController {
     async Add(request, response) {
         try {
             let result = await sellerModel.Add(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -16,7 +20,11 @@ class sellerController {
     async List(request, response) {
         try {
             let result = await sellerModel.List();
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -25,7 +33,11 @@ class sellerController {
     async ListWithSlot(request, response) {
         try {
             let result = await sellerModel.ListWithSlot();
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -34,7 +46,12 @@ class sellerController {
     async searchSellerDetails(request, response) {
         try {
             let result = await sellerModel.searchSellerDetails(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
+
         } catch (error) {
             console.log(error);
         }
@@ -43,7 +60,11 @@ class sellerController {
     async AllAppointment(request, response) {
         try {
             let result = await sellerModel.AllAppointment(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -52,7 +73,11 @@ class sellerController {
     async AcceptRejectAppointment(request, response) {
         try {
             let result = await sellerModel.AcceptRejectAppointment(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -61,6 +86,7 @@ class sellerController {
     async Login(request, response) {
         try {
             let result = await sellerModel.Login(request.body);
+
             if (result)
                 response.handler.success(result, 'STATUS.SUCCESS')
             else

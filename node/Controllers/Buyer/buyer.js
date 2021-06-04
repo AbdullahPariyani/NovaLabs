@@ -6,7 +6,11 @@ class buyerController {
     async Add(request, response) {
         try {
             let result = await buyerModel.Add(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -16,7 +20,11 @@ class buyerController {
     async List(request, response) {
         try {
             let result = await buyerModel.List();
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -25,7 +33,11 @@ class buyerController {
     async BookAppointment(request, response) {
         try {
             let result = await buyerModel.BookAppointment(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
@@ -34,6 +46,7 @@ class buyerController {
     async Login(request, response) {
         try {
             let result = await buyerModel.Login(request.body);
+
             if (result)
                 response.handler.success(result, 'STATUS.SUCCESS')
             else
