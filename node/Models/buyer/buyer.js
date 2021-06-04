@@ -16,17 +16,6 @@ class BuyerModel {
         return { count: (buyerList.length), rows: buyerList };
     }
 
-    async Search(body) {
-        const { _id } = body;
-        let sellerList = await Buyer.find({ _id });
-        return { count: (sellerList.length), rows: sellerList };
-    }
-
-    async SearchByEmail(body) {
-        let sellerList = await Buyer.find(body);
-        return { count: (sellerList.length), rows: sellerList };
-    }
-
     async BookAppointment(body) {
         const { _id, sellerId, timeSlotID, buyerId } = body;
         let bookingList = await SlotBooking.find({ _id, sellerId, timeSlotID });
@@ -40,13 +29,6 @@ class BuyerModel {
         bookingList.isBookedForRequest = true
 
         return { count: (bookingList.length), message: "Your appointment has been booked successfully" };
-    }
-
-    async AccpetedBooking(body) {
-        const { _id, sellerId, timeSlotID, buyerId } = body;
-        let bookingList = await SlotBooking.find({ _id, sellerId, timeSlotID });
-
-        const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true, buyerId: buyerId });
     }
 
     async Login(body) {

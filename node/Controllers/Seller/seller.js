@@ -10,6 +10,34 @@ class sellerController {
         } catch (error) {
             console.log(error);
         }
+
+    }
+
+    async List(request, response) {
+        try {
+            let result = await sellerModel.List();
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async ListWithSlot(request, response) {
+        try {
+            let result = await sellerModel.ListWithSlot();
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async searchSellerDetails(request, response) {
+        try {
+            let result = await sellerModel.searchSellerDetails(request.body);
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async AllAppointment(request, response) {

@@ -11,6 +11,41 @@ class SellerModel {
         return sellerModel
     }
 
+    async List() {
+        let sellerList = await Seller.find();
+        return { count: (sellerList.length), rows: sellerList };
+    }
+
+    async ListWithSlot() {
+        let sellerList = await Seller.find();
+        let slotBookingList = await SlotBooking.find();
+
+        let sellerWithSlots = [];
+        sellerList.forEach(async (seller, i) => {
+            sellerWithSlots.push({ 'seller': seller, 'slots': slotBookingList.filter(slot => slot.sellerId == seller._id) });
+        });
+        return sellerWithSlots;
+    }
+
+    async searchSellerDetails(body) {
+        const sellerList = await this.ListWithSlot();
+        let sellerBookingList = sellerList.filter(row => row.seller._id == "60b9fe9525a0ea367cfc886f")[0].slots;
+
+        sellerBookingList = JSON.parse(JSON.stringify(sellerBookingList));
+
+        sellerBookingList = JSON.parse(JSON.stringify(sellerBookingList));
+        for (let i = 0; i < sellerBookingList.length; i++) {
+            const buyerId = sellerBookingList[i].buyerId;
+            sellerBookingList[i].buyerDetails = [];
+            if (buyerId != "") {
+                const buyerDetails = await Buyer.find({ _id: buyerId });
+                sellerBookingList[i].buyerDetails = JSON.parse(JSON.stringify(buyerDetails));
+            }
+        }
+
+        return { count: (sellerBookingList.length), rows: sellerBookingList };
+    }
+
     async AllAppointment(body) {
         let bookingList = await SlotBooking.find({ isTimeSlotBooked: false, isBookedForRequest: true, sellerId: body.sellerId });
 

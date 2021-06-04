@@ -10,17 +10,8 @@ router.route('/create')
 router.route('/list')
     .get(buyerController.List);
 
-router.route('/search')
-    .post(buyerController.Search);
-
-router.route('/search-by-email')
-    .post(buyerController.SearchByEmail);
-
 router.route('/book-appointment')
     .post(buyerController.BookAppointment);
-
-router.route('/accpeted-booking')
-    .post(buyerController.AccpetedBooking);
 
 router.route('/login')
     .post(buyerController.Login);
