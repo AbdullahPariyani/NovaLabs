@@ -8,7 +8,7 @@ class BuyerModel {
     async Add(seller) {
         let buyerModel = new Buyer(seller);
         await buyerModel.save();
-        return buyerModel
+        return buyerModel;
     }
 
     async List() {

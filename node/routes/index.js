@@ -6,6 +6,6 @@ module.exports = app => {
     })
 
     // app.use("/buyer", require('./buyer'))
-    app.use("/seller", require('./seller'))
-    app.use("/buyer", require('./buyer'))
+    app.use("/seller", require('./seller'));
+    app.use("/buyer", require('./buyer'));
 }
