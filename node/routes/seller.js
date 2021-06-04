@@ -22,4 +22,7 @@ router.route('/get-all-appointment')
 router.route('/accept-reject-appointment')
     .post(sellerController.AcceptRejectAppointment);
 
+router.route('/login')
+    .post(sellerController.Login);
+
 module.exports = router

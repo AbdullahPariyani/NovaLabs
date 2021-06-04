@@ -60,7 +60,16 @@ class buyerController {
 
     async AccpetedBooking(request, response) {
         try {
-            let result = await buyerModel.AccpetedBooking(request.body);
+            let result = await buyerModel.Login(request.body);
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async Login(request, response) {
+        try {
+            let result = await buyerModel.Login(request.body);
             response.handler.success(result, 'STATUS.SUCCESS')
         } catch (error) {
             console.log(error);

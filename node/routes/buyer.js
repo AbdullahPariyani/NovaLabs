@@ -22,4 +22,8 @@ router.route('/book-appointment')
 router.route('/accpeted-booking')
     .post(buyerController.AccpetedBooking);
 
+router.route('/login')
+    .post(buyerController.Login);
+
+
 module.exports = router

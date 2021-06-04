@@ -49,6 +49,14 @@ class BuyerModel {
         const updatedRecord = await SlotBooking.updateOne({ _id, sellerId, timeSlotID }, { isBookedForRequest: true, buyerId: buyerId });
     }
 
+    async Login(body) {
+        let { email, password } = body;
+        let authenticate = await Buyer.find({ email, password });
+        if (authenticate.length === 0)
+            return { code: 401, message: 'UNAUTHORIZED' }
+        return { code: 200, message: 'SUCCESS' }
+    }
+
 }
 
 module.exports = BuyerModel

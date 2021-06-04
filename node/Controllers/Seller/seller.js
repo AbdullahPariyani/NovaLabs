@@ -57,6 +57,15 @@ class sellerController {
             console.log(error);
         }
     }
+
+    async Login(request, response) {
+        try {
+            let result = await sellerModel.Login(request.body);
+            response.handler.success(result, 'STATUS.SUCCESS')
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 module.exports = sellerController;

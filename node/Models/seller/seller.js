@@ -69,6 +69,14 @@ class SellerModel {
         return { count: (slotBookItem.length), message: `${responseMsg} Successfully` };
     }
 
+    async Login(body) {
+        let { email, password } = body;
+        let authenticate = await Seller.find({ email, password });
+        if (authenticate.length === 0)
+            return { code: 401, message: 'UNAUTHORIZED' }
+        return { code: 200, message: 'SUCCESS' }
+    }
+
     async slotBook(id) {
         Object.values(DefaultSlots.slotValue).forEach(async (slot, i) => {
             let slotModel = new SlotBooking({
