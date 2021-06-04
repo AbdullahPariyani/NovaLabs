@@ -17,7 +17,7 @@ router.route('/list-seller-with-slot')
     .get(sellerController.ListWithSlot);
 
 router.route('/get-all-appointment')
-    .get(sellerController.AllAppointment);
+    .post(sellerController.AllAppointment);
 
 router.route('/accept-reject-appointment')
     .post(sellerController.AcceptRejectAppointment);

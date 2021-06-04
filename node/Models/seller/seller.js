@@ -34,7 +34,7 @@ class SellerModel {
     }
 
     async AllAppointment(body) {
-        let bookingList = await SlotBooking.find({ isBookedForRequest: true, isTimeSlotBooked: false });
+        let bookingList = await SlotBooking.find({ isTimeSlotBooked: false, isBookedForRequest: true, sellerId: body.sellerId });
 
         let tempBuyerDetails, newArray = JSON.parse(JSON.stringify(bookingList));
         for (let i = 0; i < newArray.length; i++) {
