@@ -19,6 +19,12 @@ const slotBooking = new mongoose.Schema({
     buyerId: {
         type: String
     }
+}, {
+    toJSON: {
+        transform(doc, ret) {
+            delete ret.__v;
+        },
+    },
 });
 
 module.exports = SlotBooking = mongoose.model('SlotBooking', slotBooking);

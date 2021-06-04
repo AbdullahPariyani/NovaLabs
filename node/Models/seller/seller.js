@@ -42,7 +42,6 @@ class SellerModel {
             newArray[i].firstName = tempBuyerDetails[0].firstName;
             newArray[i].lastName = tempBuyerDetails[0].lastName;
             newArray[i].email = tempBuyerDetails[0].email;
-            delete newArray[i].__v;
         }
 
         return { count: (bookingList.length), rows: newArray };
@@ -76,7 +75,7 @@ class SellerModel {
         if (authenticate.length === 0)
             return false;
 
-        return true;
+        return authenticate;
     }
 
     async slotBook(id) {
