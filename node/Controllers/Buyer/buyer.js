@@ -70,7 +70,10 @@ class buyerController {
     async Login(request, response) {
         try {
             let result = await buyerModel.Login(request.body);
-            response.handler.success(result, 'STATUS.SUCCESS')
+            if (result)
+                response.handler.success(result, 'STATUS.SUCCESS')
+            else
+                response.handler.notFound();
         } catch (error) {
             console.log(error);
         }
