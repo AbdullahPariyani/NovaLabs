@@ -7,15 +7,6 @@ const sellerController = new (require('../Controllers/Seller/seller'))();
 router.route('/create')
     .post(sellerController.Add);
 
-router.route('/list')
-    .get(sellerController.List);
-
-router.route('/search')
-    .post(sellerController.Search);
-
-router.route('/list-seller-with-slot')
-    .get(sellerController.ListWithSlot);
-
 router.route('/get-all-appointment')
     .post(sellerController.AllAppointment);
 

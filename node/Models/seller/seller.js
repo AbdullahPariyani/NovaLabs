@@ -11,28 +11,6 @@ class SellerModel {
         return sellerModel
     }
 
-    async List() {
-        let sellerList = await Seller.find();
-        return { count: (sellerList.length), rows: sellerList };
-    }
-
-    async ListWithSlot() {
-        let sellerList = await Seller.find();
-        let slotBookingList = await SlotBooking.find();
-
-        let sellerWithSlots = [];
-        sellerList.forEach(async (seller, i) => {
-            sellerWithSlots.push({ 'seller': seller, 'slots': slotBookingList.filter(slot => slot.sellerId == seller._id) });
-        });
-        return sellerWithSlots;
-    }
-
-    async Search(body) {
-        const { email } = body;
-        let sellerList = await Seller.find({ email });
-        return { count: (sellerList.length), rows: sellerList };
-    }
-
     async AllAppointment(body) {
         let bookingList = await SlotBooking.find({ isTimeSlotBooked: false, isBookedForRequest: true, sellerId: body.sellerId });
 
