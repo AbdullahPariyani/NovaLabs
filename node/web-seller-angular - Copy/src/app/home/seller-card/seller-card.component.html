@@ -1,0 +1,18 @@
+<div class="row" *ngIf="sellerData.length !== 0">
+    <div class="col-md-4 mt-2" *ngFor="let seller of sellerData">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Name: {{seller.firstName | titlecase}} {{seller.lastName | titlecase}}</h5>
+                <hr>
+                <p class="card-text">Slot: <span class="text-success text-bold">{{seller.timeSlotValue}}</span></p>
+                <p class="card-text">Email: <a href="mailto:{{sellerData.email}}">{{seller.email}}</a></p>
+                <hr>
+                <button href="#" [disabled]="loadData" class="btn btn-dark" (click)="submitAppointment({_id:seller._id,accepted:true})">Accept</button>
+                <button href="#" [disabled]="loadData" class="btn btn-danger ml-2" (click)="submitAppointment({_id:seller._id,accepted:false})">Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="sellerData.length === 0">
+    No appointment request found
+</div>

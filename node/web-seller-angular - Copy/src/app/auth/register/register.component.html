@@ -1,0 +1,48 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="form-horizontal auth-form">
+
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+            <div class="form-group">
+                <label for="firstName">First Name <span class="mandatory">*</span></label>
+                <input name="firstName" type="text" class="form-control" placeholder="First Name" id="firstName" formControlName="firstName" [ngClass]="{ 'is-invalid': registerForm.controls.firstName.invalid && registerForm.controls.firstName.touched }">
+            </div>
+        </div>
+
+        <div class="col-sm-6 mb-3">
+            <div class="form-group">
+                <label for="lastName">Last Name <span class="mandatory">*</span></label>
+                <input type="text" id="lastName" class="form-control" placeholder="Last Name" formControlName="lastName" [class.is-invalid]="registerForm.controls.lastName.invalid && registerForm.controls.lastName.touched">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <div class="form-group">
+                <label for="email">Email <span class="mandatory">*</span></label>
+                <input name="email" type="email" class="form-control" placeholder="Email" id="email" formControlName="email" [class.is-invalid]="registerForm.controls.email.invalid && registerForm.controls.email.touched">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 mb-3">
+            <div class="form-group">
+                <label for="password">Password <span class="mandatory">*</span></label>
+                <input name="password" type="password" class="form-control" placeholder="Password" id="password" formControlName="password" [class.is-invalid]="registerForm.controls.password.invalid && registerForm.controls.password.touched">
+            </div>
+        </div>
+
+        <div class="col-sm-6 mb-3">
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password <span class="mandatory">*</span></label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword" [class.is-invalid]="registerForm.controls.confirmPassword.invalid && registerForm.controls.confirmPassword.touched">
+            </div>
+        </div>
+    </div>
+    <p class="text-danger" *ngIf="submitted && this.registerForm.invalid">Please enter valid values</p>
+    <button [disabled]="loading" class="btn btn-primary" type="submit" (click)="onSubmit('register')">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Register
+    </button>
+    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+</form>

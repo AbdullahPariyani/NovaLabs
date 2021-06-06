@@ -1,0 +1,17 @@
+﻿<div class="card mt-4">
+    <h5 class="card-header">Hello {{sellerData.firstName | titlecase}} {{sellerData.lastName | titlecase}},</h5>
+    <div class="card-body">
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+
+        <div class="row">
+            <div class="col-md-4 mt-2">
+                <h5>Slot Status</h5>
+                <app-seller-slot-status [sellerSlots]="searchSellerDetails"></app-seller-slot-status>
+            </div>
+            <div class="col-md-8 mt-2">
+                <h5>Request:</h5>
+                <app-seller-card [sellerData]="appointmentData"></app-seller-card>
+            </div>
+        </div>
+    </div>
+</div>

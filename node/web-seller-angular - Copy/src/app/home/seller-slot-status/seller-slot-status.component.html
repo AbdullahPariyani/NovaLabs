@@ -1,0 +1,21 @@
+<div class="row" *ngIf="sellerSlots.length !== 0">
+    <div class="col-md-12 mt-2" *ngFor="let seller of sellerSlots;index as i">
+        <div class="card">
+            <div class="card-body">
+                <div *ngIf="seller.buyerDetails == '' ">
+                    <h5>Slot: <span class="text-danger">{{seller.timeSlotValue}} not book</span></h5>
+                </div>
+                <div *ngIf="seller.buyerDetails != '' ">
+                    <h5 class="card-title">Slot: <span class="text-success text-bold">{{seller.timeSlotValue}}</span></h5>
+                    <hr>
+                    <p class="card-text"> Name: {{seller.buyerDetails.firstName | titlecase}} {{seller.buyerDetails.lastName | titlecase}}</p>
+                    <p class="card-text">Email: <a href="mailto:{{seller.buyerDetails.email}}">{{seller.buyerDetails.email}}</a></p>
+                    <hr>
+                    <h5 class="card-text" *ngIf="seller.isTimeSlotBooked && seller.isBookedForRequest">Status: <span class="text-success">Accepted</span></h5>
+                    <h5 class="card-text" *ngIf="!seller.isTimeSlotBooked && seller.isBookedForRequest">Status: <span class="text-primary">Pending</span></h5>
+                    <h5 class="card-text" *ngIf="seller.isTimeSlotBooked && !seller.isBookedForRequest">Status: <span class="text-danger">Rejected</span></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
