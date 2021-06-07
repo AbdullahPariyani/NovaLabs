@@ -10,6 +10,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 // Import Screens
 import HomeScreen from './DrawerScreens/HomeScreen';
 import SettingsScreen from './DrawerScreens/SettingScreen';
+import FlatListDemo from './DrawerScreens/FlatListDemo';
 import CustomSidebarMenu from './Components/CustomSidebarMenu';
 import NavigationDrawerHeader from './Components/NavigationDrawerHeader';
 
@@ -67,6 +68,33 @@ const settingScreenStack = ({ navigation }) => {
   );
 };
 
+const flatListDemo = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      initialRouteName="FlatListDemo"
+      screenOptions={{
+        headerLeft: () => (
+          <NavigationDrawerHeader navigationProps={navigation} />
+        ),
+        headerStyle: {
+          backgroundColor: '#307ecc', //Set Header color
+        },
+        headerTintColor: '#fff', //Set Header text color
+        headerTitleStyle: {
+          fontWeight: 'bold', //Set Header text style
+        },
+      }}>
+      <Stack.Screen
+        name="FlatListDemo"
+        component={FlatListDemo}
+        options={{
+          title: 'Settings', //Set Header Title
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const DrawerNavigatorRoutes = (props) => {
   return (
     <Drawer.Navigator
@@ -89,6 +117,11 @@ const DrawerNavigatorRoutes = (props) => {
         name="settingScreenStack"
         options={{ drawerLabel: 'Setting Screen' }}
         component={settingScreenStack}
+      />
+      <Drawer.Screen
+        name="flatListDemo"
+        options={{ drawerLabel: 'flat Screen' }}
+        component={flatListDemo}
       />
     </Drawer.Navigator>
   );
