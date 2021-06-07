@@ -8,7 +8,7 @@ const http = (SHOULD_RUN_ON_HTTP == 'true') ? require('http') : require('https')
 const express = require('express') // NODE FRAMEWORK
 const bodyParser = require('body-parser') // TO PARSE POST REQUEST
 const cors = require('cors') // ALLOW CROSS ORIGIN REQUESTS
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 3000
 const app = express();
 
 // ---------------------------    SERVER CONFIGS ----------------------------------
