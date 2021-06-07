@@ -116,8 +116,8 @@ const LoginScreen = ({ navigation }) => {
                 onSubmitEditing={Keyboard.dismiss}
                 blurOnSubmit={false}
                 secureTextEntry={true}
+                secureTextEntry={true}
                 underlineColorAndroid="#f000"
-                returnKeyType="next"
               />
             </View>
             {errortext != '' ? (

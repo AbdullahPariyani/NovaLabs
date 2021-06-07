@@ -17,18 +17,20 @@ import {
 import Loader from './Components/Loader';
 
 const RegisterScreen = (props) => {
+
   const [userName, setUserName] = useState('');
+  const [userLastName, setUserLastName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userAge, setUserAge] = useState('');
-  const [userAddress, setUserAddress] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [errortext, setErrortext] = useState('');
   const [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
 
   const nameInputRef = createRef();
   const emailInputRef = createRef();
-  const ageInputRef = createRef();
-  const addressInputRef = createRef();
+  const passwordInputRef = createRef();
+  const lastNameInputRef = createRef();
 
   const handleSubmitButton = () => {
     setErrortext('');
@@ -40,21 +42,21 @@ const RegisterScreen = (props) => {
       alert('Please fill Email');
       return;
     }
-    if (!userAge) {
-      alert('Please fill Age');
+    if (!userPassword) {
+      alert('Please fill Password');
       return;
     }
-    if (!userAddress) {
-      alert('Please fill Address');
+    if (!userLastName) {
+      alert('Please fill LastName');
       return;
     }
     //Show Loader
     setLoading(true);
     var dataToSend = {
-      user_name: userName,
-      user_email: userEmail,
-      user_age: userAge,
-      user_address: userAddress,
+      firstName: userName,
+      lastName: userLastName,
+      email: userEmail,
+      password: userPassword
     };
     var formBody = [];
     for (var key in dataToSend) {
@@ -64,7 +66,7 @@ const RegisterScreen = (props) => {
     }
     formBody = formBody.join('&');
 
-    fetch('https://aboutreact.herokuapp.com/register.php', {
+    fetch('https://node-api-nova.herokuapp.com/buyer/create', {
       method: 'POST',
       body: formBody,
       headers: {
@@ -78,7 +80,7 @@ const RegisterScreen = (props) => {
         setLoading(false);
         console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.status == 1) {
+        if (responseJson) {
           setIsRegistraionSuccess(true);
           console.log('Registration Successful. Please Login to proceed');
         } else {
@@ -133,6 +135,22 @@ const RegisterScreen = (props) => {
               autoCapitalize="sentences"
               returnKeyType="next"
               onSubmitEditing={() =>
+                lastNameInputRef.current && lastNameInputRef.current.focus()
+              }
+              blurOnSubmit={false}
+            />
+          </View>
+          <View style={styles.SectionStyle}>
+            <TextInput
+              style={styles.inputStyle}
+              onChangeText={(UserLastName) => setUserLastName(UserLastName)}
+              underlineColorAndroid="#f000"
+              placeholder="Enter LastName"
+              placeholderTextColor="#8b9cb5"
+              autoCapitalize="sentences"
+              ref={lastNameInputRef}
+              returnKeyType="next"
+              onSubmitEditing={() =>
                 emailInputRef.current && emailInputRef.current.focus()
               }
               blurOnSubmit={false}
@@ -145,11 +163,10 @@ const RegisterScreen = (props) => {
               underlineColorAndroid="#f000"
               placeholder="Enter Email"
               placeholderTextColor="#8b9cb5"
-              keyboardType="email-address"
               ref={emailInputRef}
               returnKeyType="next"
               onSubmitEditing={() =>
-                ageInputRef.current && ageInputRef.current.focus()
+                passwordInputRef.current && passwordInputRef.current.focus()
               }
               blurOnSubmit={false}
             />
@@ -157,33 +174,18 @@ const RegisterScreen = (props) => {
           <View style={styles.SectionStyle}>
             <TextInput
               style={styles.inputStyle}
-              onChangeText={(UserAge) => setUserAge(UserAge)}
+              onChangeText={(UserPassword) => setUserPassword(UserPassword)}
               underlineColorAndroid="#f000"
-              placeholder="Enter Age"
+              placeholder="Enter Password"
               placeholderTextColor="#8b9cb5"
-              keyboardType="numeric"
-              ref={ageInputRef}
+              ref={passwordInputRef}
               returnKeyType="next"
-              onSubmitEditing={() =>
-                addressInputRef.current && addressInputRef.current.focus()
-              }
-              blurOnSubmit={false}
-            />
-          </View>
-          <View style={styles.SectionStyle}>
-            <TextInput
-              style={styles.inputStyle}
-              onChangeText={(UserAddress) => setUserAddress(UserAddress)}
-              underlineColorAndroid="#f000"
-              placeholder="Enter Address"
-              placeholderTextColor="#8b9cb5"
-              autoCapitalize="sentences"
-              ref={addressInputRef}
-              returnKeyType="next"
+              secureTextEntry={true}
               onSubmitEditing={Keyboard.dismiss}
               blurOnSubmit={false}
             />
           </View>
+
           {errortext != '' ? (
             <Text style={styles.errorTextStyle}> {errortext} </Text>
           ) : null}
