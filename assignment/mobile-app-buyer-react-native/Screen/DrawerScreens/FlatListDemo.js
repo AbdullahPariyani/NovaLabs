@@ -3,6 +3,9 @@
 // Import React and Component
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { ListItem, Icon, Button } from 'react-native-elements';
+
+
 
 const FlatListDemo = () => {
 
@@ -21,72 +24,49 @@ const FlatListDemo = () => {
 
     return (
 
-        <View style={{ flex: 1, padding: 2 }}>
-            {users.map((user) => (
-                <View style={{
-                    flex: 1
-                }}>
-                    <Text key={user.seller.id}>
-                        {user.seller.email}
-                    </Text>
-                    <View>
-                        {user.slots.map((slots) => (
-                            <View>
-                                <Text key={slots._id}>
-                                    {slots.timeSlotValue} : {slots.isTimeSlotBooked && slots.isBookedForRequest ? 'Accepted' : 'Rejected'}
-                                </Text>
-                            </View>
-                        ))}
-                    </View>
-                </View>
-            ))}
+        <View>
+            {
+                users.map((user, i) => (
+                    <ListItem key={user.seller._id} bottomDivider>
+                        {/* <Avatar source={{ uri: l.avatar_url }} /> */}
+                        <ListItem.Content bottomDivider>
+                            <ListItem.Title style={styles.title}>{user.seller.firstName} {user.seller.lastName}</ListItem.Title>
+                            <ListItem.Subtitle>{user.seller.email}</ListItem.Subtitle>
+                            {
+                                user.slots.map((slot, i) => (
+                                    <View style={{ flexDirection: 'row', marginTop: 10 }} key={slot._id}>
+                                        <View style={{ marginRight: 10 }} bottomDivider>
+                                            <Text>{slot.timeSlotValue}</Text>
+                                        </View>
+                                        <View bottomDivider>
+                                            <Button title={slot.timeSlotValue} onPress={() => { }}></Button>
+                                        </View>
+                                    </View>
+                                ))
+                            }
+
+                        </ListItem.Content>
+                    </ListItem>
+                ))
+            }
+
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 8,
-        backgroundColor: "aliceblue",
+
+    title: {
+        textTransform: 'capitalize'
     },
-    box: {
-        width: '100%',
-        marginTop: '5%',
-        padding: '5%',
-    },
-    row: {
-        flexDirection: "row",
-        flexWrap: "wrap",
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
     },
     button: {
-        paddingHorizontal: 8,
-        paddingVertical: 6,
-        borderRadius: 4,
-        backgroundColor: "oldlace",
-        alignSelf: "flex-start",
-        marginHorizontal: "1%",
-        marginBottom: 6,
-        minWidth: "48%",
-        textAlign: "center",
-    },
-    selected: {
-        backgroundColor: "coral",
-        borderWidth: 0,
-    },
-    buttonLabel: {
-        fontSize: 12,
-        fontWeight: "500",
-        color: "coral",
-    },
-    selectedLabel: {
-        color: "white",
-    },
-    label: {
-        textAlign: "center",
-        marginBottom: 10,
-        fontSize: 24,
-    },
+        paddingTop: '10px'
+    }
 });
 
 
