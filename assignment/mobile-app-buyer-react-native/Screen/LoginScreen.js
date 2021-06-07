@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
     setLoading(true);
-    let dataToSend = { user_email: userEmail, user_password: userPassword };
+    let dataToSend = { email: userEmail, password: userPassword };
     let formBody = [];
     for (let key in dataToSend) {
       let encodedKey = encodeURIComponent(key);
@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
     }
     formBody = formBody.join('&');
 
-    fetch('https://aboutreact.herokuapp.com/login.php', {
+    fetch('https://node-api-nova.herokuapp.com/buyer/login', {
       method: 'POST',
       body: formBody,
       headers: {
@@ -60,9 +60,9 @@ const LoginScreen = ({ navigation }) => {
         setLoading(false);
         console.log(responseJson);
         // If server response message same as Data Matched
-        if (responseJson.status == 1) {
-          AsyncStorage.setItem('user_id', responseJson.data[0].user_id);
-          console.log(responseJson.data[0].user_id);
+        if (responseJson?.data) {
+          AsyncStorage.setItem('user_id', responseJson.data[0]._id);
+          console.log(responseJson.data[0]._id);
           navigation.replace('DrawerNavigationRoutes');
         } else {
           setErrortext('Please check your email id or password');
@@ -88,17 +88,7 @@ const LoginScreen = ({ navigation }) => {
         }}>
         <View>
           <KeyboardAvoidingView enabled>
-            <View style={{ alignItems: 'center' }}>
-              <Image
-                source={require('../Image/aboutreact.png')}
-                style={{
-                  width: '50%',
-                  height: 100,
-                  resizeMode: 'contain',
-                  margin: 30,
-                }}
-              />
-            </View>
+
             <View style={styles.SectionStyle}>
               <TextInput
                 style={styles.inputStyle}
