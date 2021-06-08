@@ -75,7 +75,17 @@ const HomeScreen = () => {
                           <Text>{slot.timeSlotValue}</Text>
                         </View>
                         <View bottomDivider>
-                          <Button title={slot.timeSlotValue} onPress={() => { bookAppointment(slot) }}></Button>
+                          {
+                            slot.isTimeSlotBooked && slot.isBookedForRequest ?
+                              <Button disabled='true' title='Requested'></Button>
+                              : [
+                                !slot.isTimeSlotBooked && slot.isBookedForRequest
+                                  ?
+                                  <Button disabled='true' title='Booked'></Button>
+                                  :
+                                  <Button title='Available' onPress={() => { bookAppointment(slot) }}></Button>
+                              ]
+                          }
                         </View>
                       </View>
                     ))
@@ -88,7 +98,7 @@ const HomeScreen = () => {
 
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 };
 
