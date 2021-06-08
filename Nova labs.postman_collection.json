@@ -1,0 +1,358 @@
+{
+	"info": {
+		"_postman_id": "1935a3e8-cb3f-460c-b7df-8dba58b01e81",
+		"name": "Nova labs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Seller",
+			"item": [
+				{
+					"name": "Seller Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"atif\",\r\n    \"lastName\": \"pariyani\",\r\n    \"email\": \"atif.pariyani@gmail.com\",\r\n    \"password\": \"atif.01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/create",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Seller Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"akram.buyer@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/login",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List-seller",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/list",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List-seller-with-slot",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/list-seller-with-slot",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"list-seller-with-slot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search seller details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sellerId\": \"60b9fe9525a0ea367cfc886f\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/search-seller-details",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"search-seller-details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All-appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sellerId\": \"60b9fea525a0ea367cfc8875\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/get-all-appointment",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"get-all-appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accept-reject-appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60b8efd7bbeab7238c47fdeb\",\r\n    \"accepted\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/seller/accept-reject-appointment",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"seller",
+								"accept-reject-appointment"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Buyer",
+			"item": [
+				{
+					"name": "Create buyer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"akram\",\r\n    \"lastName\": \"buyer\",\r\n    \"email\": \"akram.buyer@gmail.com\",\r\n    \"password\": \"akram.01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/buyer/create",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"buyer",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buyer-list",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/buyer/list",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"buyer",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book-appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"60b9fea525a0ea367cfc887a\",\r\n    \"sellerId\": \"60b9fea525a0ea367cfc8875\",\r\n    \"timeSlotID\": 501,\r\n    \"buyerId\": \"60b9fedb25a0ea367cfc8881\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/buyer/book-appointment",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"buyer",
+								"book-appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buyer Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"abdullah.pariyani@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://node-api-nova.herokuapp.com/buyer/login",
+							"protocol": "https",
+							"host": [
+								"node-api-nova",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"buyer",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
