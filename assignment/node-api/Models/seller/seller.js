@@ -75,9 +75,9 @@ class SellerModel {
         else if (!slotBookItem[0].isBookedForRequest)
             return { count: slotBookItem.length, message: "Please create slot book request first" }
 
-        let updateValue = { isTimeSlotBooked: true };
+        let updateValue = { isTimeSlotBooked: true, isBookedForRequest: true };
         if (!accepted) {
-            updateValue = { isTimeSlotBooked: true, isBookedForRequest: false }
+            updateValue = { isTimeSlotBooked: false, isBookedForRequest: false, buyerId: '' }
         }
         const updatedRecord = await SlotBooking.updateOne({ _id }, updateValue);
         const responseMsg = accepted ? 'Accepted' : 'Rejected'
