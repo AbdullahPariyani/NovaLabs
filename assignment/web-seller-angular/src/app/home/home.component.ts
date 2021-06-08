@@ -27,8 +27,8 @@ export class HomeComponent {
 
     async loadData() {
         this.userService.loadData$.subscribe(state => {
-            if (state) {
-
+            if (state && this.sellerData) {
+                debugger
                 this.userService.getAll(this.sellerData).pipe(first()).subscribe((appointment: any) => {
                     this.loading = false;
                     this.appointmentData = appointment.data.rows;

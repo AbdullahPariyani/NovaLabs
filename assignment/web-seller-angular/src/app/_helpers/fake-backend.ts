@@ -28,7 +28,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
-            }    
+            }
         }
 
         // route functions
@@ -69,10 +69,3 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
     }
 }
-
-export let fakeBackendProvider = {
-    // use fake backend in place of Http service for backend-less development
-    provide: HTTP_INTERCEPTORS,
-    useClass: FakeBackendInterceptor,
-    multi: true
-};
