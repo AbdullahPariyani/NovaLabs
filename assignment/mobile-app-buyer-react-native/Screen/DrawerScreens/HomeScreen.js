@@ -35,7 +35,7 @@ const HomeScreen = () => {
     }).then((response) => response.json())
       .then((responseJson) => {
         setLoading(false);
-        console.log(responseJson);
+        fetchUsers();
       })
       .catch((error) => {
         setLoading(false);
@@ -64,7 +64,6 @@ const HomeScreen = () => {
           {
             users.map((user, i) => (
               <ListItem key={user.seller._id} bottomDivider>
-                {/* <Avatar source={{ uri: l.avatar_url }} /> */}
                 <ListItem.Content bottomDivider>
                   <ListItem.Title style={styles.title}>{user.seller.firstName} {user.seller.lastName}</ListItem.Title>
                   <ListItem.Subtitle>{user.seller.email}</ListItem.Subtitle>
@@ -77,13 +76,13 @@ const HomeScreen = () => {
                         <View bottomDivider>
                           {
                             slot.isTimeSlotBooked && slot.isBookedForRequest ?
-                              <Button disabled='true' title='Requested'></Button>
+                              <Button disabled='true' title='Booked' key={slot.sellerId + slot._id}></Button>
                               : [
                                 !slot.isTimeSlotBooked && slot.isBookedForRequest
                                   ?
-                                  <Button disabled='true' title='Booked'></Button>
+                                  <Button disabled='true' title='Requested' key={slot.sellerId + slot.sellerId}></Button>
                                   :
-                                  <Button title='Available' onPress={() => { bookAppointment(slot) }}></Button>
+                                  <Button title='Available' onPress={() => { bookAppointment(slot) }} key={slot._id + slot.sellerId}></Button>
                               ]
                           }
                         </View>
