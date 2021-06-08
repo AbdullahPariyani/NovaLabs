@@ -2,7 +2,7 @@
 
 // Import React and Component
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, TextInput } from 'react-native';
 import { ListItem, Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../Components/Loader';
@@ -11,9 +11,11 @@ import Loader from '../Components/Loader';
 
 const HomeScreen = () => {
 
-  const [users, usersSet] = React.useState([]);
+  const [masterDataSource, usersSet] = React.useState([]);
   const [loading, setLoading] = useState(false);
   const [buyerId, setBuyerId] = useState(null);
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [search, setSearch] = useState('');
 
   async function bookAppointment(slot) {
     setLoading(true);
@@ -48,10 +50,35 @@ const HomeScreen = () => {
     const fullResponse = await fetch('https://node-api-nova.herokuapp.com/seller/list-seller-with-slot');
     const responseJson = await fullResponse.json();
     usersSet(responseJson.data);
+    setFilteredDataSource(responseJson.data);
+
     await AsyncStorage.getItem('user_id').then((value) => setBuyerId(value));
     setLoading(false);
     console.log(fullResponse);
   }
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource and update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        // Applying filter for the inserted text in search bar
+        const itemData = item.seller.firstName
+          ? item.seller.firstName.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
 
   React.useEffect(() => fetchUsers(), []);
 
@@ -60,9 +87,16 @@ const HomeScreen = () => {
 
       <ScrollView>
         <View>
+          <TextInput
+            style={styles.textInputStyle}
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
+            underlineColorAndroid="transparent"
+            placeholder="Search with First Name"
+          />
           <Loader loading={loading} />
           {
-            users.map((user, i) => (
+            filteredDataSource.map((user, i) => (
               <ListItem key={user.seller._id} bottomDivider>
                 <ListItem.Content bottomDivider>
                   <ListItem.Title style={styles.title}>{user.seller.firstName} {user.seller.lastName}</ListItem.Title>
@@ -106,14 +140,14 @@ const styles = StyleSheet.create({
   title: {
     textTransform: 'capitalize'
   },
-  fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#009688',
+    backgroundColor: '#FFFFFF',
   },
-  button: {
-    paddingTop: '10px'
-  }
 });
 
 
