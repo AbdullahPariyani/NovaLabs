@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { ListItem, Button } from 'react-native-elements';
+import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../Components/Loader';
 
 
@@ -12,19 +13,47 @@ const HomeScreen = () => {
 
   const [users, usersSet] = React.useState([]);
   const [loading, setLoading] = useState(false);
+  const [buyerId, setBuyerId] = useState(null);
 
-  React.useEffect(() => {
-    async function fetchUsers() {
-      setLoading(true);
-      const fullResponse = await fetch('https://node-api-nova.herokuapp.com/seller/list-seller-with-slot');
-      const responseJson = await fullResponse.json();
-      usersSet(responseJson.data);
-      setLoading(false);
-      console.log(fullResponse);
+  async function bookAppointment(slot) {
+    setLoading(true);
+    let dataToSend = { _id: slot._id, sellerId: slot.sellerId, timeSlotID: slot.timeSlotID, buyerId: buyerId };
+
+    let formBody = [];
+    for (let key in dataToSend) {
+      let encodedKey = encodeURIComponent(key);
+      let encodedValue = encodeURIComponent(dataToSend[key]);
+      formBody.push(encodedKey + '=' + encodedValue);
     }
+    formBody = formBody.join('&');
+    console.log(formBody, dataToSend)
 
-    fetchUsers();
-  }, []);
+    fetch('https://node-api-nova.herokuapp.com/buyer/book-appointment', {
+      method: 'POST',
+      body: formBody,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' }
+    }).then((response) => response.json())
+      .then((responseJson) => {
+        setLoading(false);
+        console.log(responseJson);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
+  }
+
+  async function fetchUsers() {
+    setLoading(true);
+    const fullResponse = await fetch('https://node-api-nova.herokuapp.com/seller/list-seller-with-slot');
+    const responseJson = await fullResponse.json();
+    usersSet(responseJson.data);
+    await AsyncStorage.getItem('user_id').then((value) => setBuyerId(value));
+    setLoading(false);
+    console.log(fullResponse);
+  }
+
+  React.useEffect(() => fetchUsers(), []);
 
   return (
     <SafeAreaView>
@@ -46,7 +75,7 @@ const HomeScreen = () => {
                           <Text>{slot.timeSlotValue}</Text>
                         </View>
                         <View bottomDivider>
-                          <Button title={slot.timeSlotValue} onPress={() => { }}></Button>
+                          <Button title={slot.timeSlotValue} onPress={() => { bookAppointment(slot) }}></Button>
                         </View>
                       </View>
                     ))
