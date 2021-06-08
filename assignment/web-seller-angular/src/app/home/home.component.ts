@@ -9,7 +9,7 @@ export class HomeComponent {
     appointmentData: any = [];
     searchSellerDetails: any = [];
 
-    sellerData: [];
+    sellerData: any = [];
 
     constructor(private userService: UserService, private auth: AuthenticationService) { }
 
