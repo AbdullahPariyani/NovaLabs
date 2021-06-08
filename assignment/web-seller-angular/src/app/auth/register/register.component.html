@@ -40,7 +40,7 @@
         </div>
     </div>
     <p class="text-danger" *ngIf="submitted && this.registerForm.invalid">Please enter valid values</p>
-    <button [disabled]="loading" class="btn btn-primary" type="submit" (click)="onSubmit('register')">
+    <button [disabled]="loading" class="btn btn-primary" type="submit" (click)="onSubmit()">
         <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
         Register
     </button>
